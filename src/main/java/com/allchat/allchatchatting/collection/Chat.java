@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Builder
@@ -27,7 +28,6 @@ public class Chat {
     private Long roomId;
 
     @Builder.Default
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     private LocalDateTime createDateTime = LocalDateTime.now();
 
 }
