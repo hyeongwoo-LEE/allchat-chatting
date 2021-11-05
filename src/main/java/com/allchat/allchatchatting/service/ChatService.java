@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Service
 public class ChatService {
@@ -19,9 +21,10 @@ public class ChatService {
     /**
      * 채팅방 메세지 불러오기
      */
-    public Flux<Chat> chatList(Integer roomId){
+    public Flux<Chat> chatList(Integer roomId, LocalDateTime joinDateTime){
 
-        return chatRepository.mFindByRoomId(roomId);
+        //참여한 시간 이후 데이터 출력력
+       return chatRepository.mFindByRoomId(roomId, joinDateTime);
     }
 
 

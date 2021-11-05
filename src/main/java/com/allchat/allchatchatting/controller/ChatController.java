@@ -7,11 +7,14 @@ import com.allchat.allchatchatting.dto.ChatJoinDTO;
 import com.allchat.allchatchatting.service.ChatService;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,7 +30,10 @@ public class ChatController {
     @GetMapping(value = "/rooms/{roomId}/chats", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Chat> findByRoomId(@PathVariable Integer roomId){
 
-        return chatService.chatList(roomId)
+        //TODO - jwt로 받기
+        LocalDateTime joinDateTime = LocalDateTime.of(2021,11,05,19,05);
+
+        return chatService.chatList(roomId, joinDateTime)
                 .subscribeOn(Schedulers.boundedElastic());
     }
 

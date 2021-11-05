@@ -41,7 +41,7 @@ class ChatServiceTest {
     void 방참여_알림() throws Exception{
         //given
         ChatJoinDTO chatJoinDTO = ChatJoinDTO.builder()
-                .participant("이형우")
+                .participant("서지수")
                 .roomId(1)
                 .build();
 
@@ -52,7 +52,7 @@ class ChatServiceTest {
         Chat saveChat = chatMono.block();
 
         Assertions.assertThat(saveChat.getId()).isNotNull();
-        Assertions.assertThat(saveChat.getMsg()).isEqualTo("이형우님이 방에 참여하셨습니다.");
+        Assertions.assertThat(saveChat.getMsg()).isEqualTo("서지수님이 방에 참여하셨습니다.");
         Assertions.assertThat(saveChat.getSender()).isNull();
         Assertions.assertThat(saveChat.getRoomId()).isEqualTo(chatJoinDTO.getRoomId());
         Assertions.assertThat(saveChat.getParticipant()).isEqualTo(chatJoinDTO.getParticipant());
