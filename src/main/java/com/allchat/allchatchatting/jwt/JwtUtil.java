@@ -17,26 +17,13 @@ public class JwtUtil implements InitializingBean {
 
     @Value("${jwt.secretKey}")
     private String secretKey;
-
-    private long expire = 60 * 24 * 30;
-
+    
     private Key key;
 
     @Override
     public void afterPropertiesSet() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
-    }
-
-    //토큰 생성
-    public String generateToken(Long userId) throws UnsupportedEncodingException {
-
-        return "Bearer " + Jwts.builder()
-                .setIssuedAt(new Date())
-                .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(expire).toInstant()))
-                .claim("userId", userId)
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
     }
 
     public Long validateAndExtract(String tokenStr){
