@@ -23,7 +23,7 @@ public class ChatService {
      */
     public Flux<Chat> chatList(Integer roomId, LocalDateTime joinDateTime){
 
-        //참여한 시간 이후 데이터 출력력
+        //참여한 시간 이후 데이터 출력
        return chatRepository.mFindByRoomId(roomId, joinDateTime);
     }
 
