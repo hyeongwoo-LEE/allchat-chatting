@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "allchat")
+@Document(collection = "chat")
 public class Chat {
 
     @Id
@@ -23,7 +23,7 @@ public class Chat {
 
     private String sender;
 
-    private Long roomId;
+    private Integer roomId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm", timezone = "Asia/Seoul")
     @Builder.Default

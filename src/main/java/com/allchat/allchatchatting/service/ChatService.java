@@ -6,6 +6,7 @@ import com.allchat.allchatchatting.dto.ChatDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -13,6 +14,15 @@ import reactor.core.publisher.Mono;
 public class ChatService {
 
     private final ChatRepository chatRepository;
+
+    /**
+     * 채팅방 메세지 불러오기
+     */
+    public Flux<Chat> chatList(Integer roomId){
+
+        return chatRepository.mFindByRoomId(roomId);
+    }
+
 
     /**
      * 메세지 저장

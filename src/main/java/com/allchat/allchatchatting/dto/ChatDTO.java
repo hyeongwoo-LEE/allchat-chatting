@@ -17,7 +17,7 @@ public class ChatDTO {
 
     private String sender;
 
-    private Long roomId;
+    private Integer roomId;
 
     public Chat toEntity(){
 

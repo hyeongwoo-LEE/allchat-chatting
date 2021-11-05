@@ -18,7 +18,7 @@ class ChatServiceTest {
         //given
         ChatDTO chatDTO = ChatDTO.builder()
                 .msg("안녕하세요")
-                .roomId(1L)
+                .roomId(1)
                 .sender("이형우")
                 .build();
 
