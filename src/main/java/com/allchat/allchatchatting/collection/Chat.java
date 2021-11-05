@@ -25,6 +25,8 @@ public class Chat {
 
     private Integer roomId;
 
+    private String participant;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm", timezone = "Asia/Seoul")
     @Builder.Default
     private LocalDateTime createDateTime = LocalDateTime.now();
