@@ -39,9 +39,8 @@ public class ChatController {
 
         String username = request.getHeaders().getFirst("username");
 
-        //TODO 권한체크
         if(!username.equals(chatAuthDTO.getUsername())){
-            System.out.println("에러 발생");
+            System.out.println("채팅방 메세지 조회 권한이 없습니다.");
         }
 
         return chatService.chatList(roomId, chatAuthDTO.getLocalDateTime())
@@ -58,20 +57,19 @@ public class ChatController {
         String username = request.getHeaders().getFirst("username");
 
         //TODO 권한체크
+        if(!username.equals(chatDTO.getSender())){
+            System.out.println("메세지 작성 권한이 없습니다.");
+        }
 
         return chatService.saveMessage(chatDTO);
     }
 
     /**
-     * 방참여 메시지 저장
+     * 방참여,나가기 메시지 저장
      */
     @CrossOrigin
     @PostMapping("/chats/join")
-    public Mono<Chat> saveJoinMessage(@RequestBody ChatJoinDTO chatJoinDTO, ServerHttpRequest request) {
-
-        String username = request.getHeaders().getFirst("username");
-
-        //TODO 권한체크
+    public Mono<Chat> saveJoinMessage(@RequestBody ChatJoinDTO chatJoinDTO) {
 
         return chatService.saveJoinMessage(chatJoinDTO);
     }
