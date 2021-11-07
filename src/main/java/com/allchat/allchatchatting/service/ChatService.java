@@ -3,10 +3,9 @@ package com.allchat.allchatchatting.service;
 import com.allchat.allchatchatting.collection.Chat;
 import com.allchat.allchatchatting.collection.ChatRepository;
 import com.allchat.allchatchatting.dto.ChatDTO;
-import com.allchat.allchatchatting.dto.ChatJoinDTO;
+import com.allchat.allchatchatting.dto.ChatNoticeDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -41,9 +40,9 @@ public class ChatService {
     /**
      * 방 참여 메세지 저장
      */
-    public Mono<Chat> saveJoinMessage(ChatJoinDTO chatJoinDTO){
+    public Mono<Chat> saveNoticeMessage(ChatNoticeDTO chatNoticeDTO){
 
-        Chat chat = chatJoinDTO.toEntity();
+        Chat chat = chatNoticeDTO.toEntity();
 
         return chatRepository.save(chat);
     }

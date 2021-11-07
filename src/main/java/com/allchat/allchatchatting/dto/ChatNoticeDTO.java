@@ -11,11 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ChatJoinDTO {
+public class ChatNoticeDTO {
 
     private String participant;
 
     private Integer roomId;
+
+    private Boolean join;
 
     public Chat toEntity(){
 

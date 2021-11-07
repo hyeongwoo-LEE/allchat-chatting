@@ -4,23 +4,15 @@ import com.allchat.allchatchatting.collection.Chat;
 import com.allchat.allchatchatting.collection.ChatRepository;
 import com.allchat.allchatchatting.dto.ChatAuthDTO;
 import com.allchat.allchatchatting.dto.ChatDTO;
-import com.allchat.allchatchatting.dto.ChatJoinDTO;
+import com.allchat.allchatchatting.dto.ChatNoticeDTO;
 import com.allchat.allchatchatting.service.ChatService;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.netty.handler.codec.http.HttpRequest;
-import io.netty.handler.codec.http.HttpResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.server.ServerRequest;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
-
-import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RestController
@@ -56,7 +48,6 @@ public class ChatController {
 
         String username = request.getHeaders().getFirst("username");
 
-        //TODO 권한체크
         if(!username.equals(chatDTO.getSender())){
             System.out.println("메세지 작성 권한이 없습니다.");
         }
@@ -68,9 +59,9 @@ public class ChatController {
      * 방참여,나가기 메시지 저장
      */
     @CrossOrigin
-    @PostMapping("/chats/join")
-    public Mono<Chat> saveJoinMessage(@RequestBody ChatJoinDTO chatJoinDTO) {
+    @PostMapping("/chats/notifications")
+    public Mono<Chat> saveNoticeMessage(@RequestBody ChatNoticeDTO chatNoticeDTO) {
 
-        return chatService.saveJoinMessage(chatJoinDTO);
+        return chatService.saveNoticeMessage(chatNoticeDTO);
     }
 }
