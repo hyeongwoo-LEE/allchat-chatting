@@ -5,6 +5,7 @@ import com.allchat.allchatchatting.collection.ChatRepository;
 import com.allchat.allchatchatting.dto.ChatAuthDTO;
 import com.allchat.allchatchatting.dto.ChatDTO;
 import com.allchat.allchatchatting.dto.ChatNoticeDTO;
+import com.allchat.allchatchatting.handler.exception.CustomException;
 import com.allchat.allchatchatting.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -19,7 +20,6 @@ import reactor.core.scheduler.Schedulers;
 public class ChatController {
 
     private final ChatService chatService;
-    private final ChatRepository chatRepository;
 
     /**
      * 채팅방 메세지 불러오기
@@ -32,7 +32,7 @@ public class ChatController {
         String username = request.getHeaders().getFirst("username");
 
         if(!username.equals(chatAuthDTO.getUsername())){
-            System.out.println("채팅방 메세지 조회 권한이 없습니다.");
+            throw new CustomException("채팅방 메세지 조회 권한이 없습니다.");
         }
 
         return chatService.chatList(roomId, chatAuthDTO.getLocalDateTime())
@@ -47,9 +47,11 @@ public class ChatController {
     public Mono<Chat> saveMessage(@RequestBody ChatDTO chatDTO, ServerHttpRequest request) {
 
         String username = request.getHeaders().getFirst("username");
+        System.out.println(username);
+        System.out.println(chatDTO.getSender());
 
         if(!username.equals(chatDTO.getSender())){
-            System.out.println("메세지 작성 권한이 없습니다.");
+            throw new CustomException("메세지 작성 권한이 없습니다.");
         }
 
         return chatService.saveMessage(chatDTO);

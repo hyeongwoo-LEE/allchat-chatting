@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import reactor.util.annotation.NonNull;
 
 @Builder
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class ChatNoticeDTO {
 
     private Integer roomId;
 
+    @NonNull
     private Boolean join;
 
     public Chat toEntity(){
