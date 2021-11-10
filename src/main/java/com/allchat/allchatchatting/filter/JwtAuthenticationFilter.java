@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.HttpMessageReader;
+import org.springframework.http.server.RequestPath;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,9 @@ import org.springframework.web.server.WebExceptionHandler;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
@@ -58,11 +62,17 @@ public class JwtAuthenticationFilter implements WebFilter {
 
         ServerHttpResponse response = exchange.getResponse();
 
+        System.out.println(LocalDateTime.now());
+
         AuthFilterDTO authFilterDTO = AuthFilterDTO.builder()
-                .code(401)
-                .message("FAIL CHECK API TOKEN")
+                .timestamp(LocalDateTime.now().toString())
+                .status(401)
+                .error("Unauthorized")
+                .message("Unauthorized")
+                .path(request.getPath().toString())
                 .build();
 
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, "application/json");
         DataBuffer dataBuffer = response.bufferFactory().wrap(objectMapper.writeValueAsBytes(authFilterDTO));
 
