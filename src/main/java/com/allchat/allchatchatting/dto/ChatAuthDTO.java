@@ -19,6 +19,6 @@ public class ChatAuthDTO {
     private String username;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm", timezone = "Asia/Seoul")
-    private LocalDateTime localDateTime;
+    private LocalDateTime joinDateTime;
 
 }

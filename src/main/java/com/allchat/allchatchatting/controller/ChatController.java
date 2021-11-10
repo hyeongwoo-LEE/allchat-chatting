@@ -35,7 +35,7 @@ public class ChatController {
             throw new CustomException("채팅방 메세지 조회 권한이 없습니다.");
         }
 
-        return chatService.chatList(roomId, chatAuthDTO.getLocalDateTime())
+        return chatService.chatList(roomId, chatAuthDTO.getJoinDateTime())
                 .subscribeOn(Schedulers.boundedElastic());
     }
 
