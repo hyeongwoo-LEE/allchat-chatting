@@ -21,12 +21,26 @@ public class ChatNoticeDTO {
 
     public Chat toEntity(){
 
-        Chat chat = Chat.builder()
-                .msg(participant+"님이 방에 참여하셨습니다.")
-                .sender(null)
-                .roomId(roomId)
-                .participant(participant)
-                .build();
+        Chat chat ;
+
+        if(this.join == true){
+
+            chat = Chat.builder()
+                    .msg(participant+"님이 입장하였습니다.")
+                    .sender(null)
+                    .roomId(roomId)
+                    .participant(participant)
+                    .build();
+
+        }else{
+
+            chat = Chat.builder()
+                    .msg(participant+"님이 퇴장하셨습니다.")
+                    .sender(null)
+                    .roomId(roomId)
+                    .participant(participant)
+                    .build();
+        }
 
         return chat;
     }
