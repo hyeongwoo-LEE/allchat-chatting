@@ -48,6 +48,7 @@ public class ChatController {
 
         String username = request.getHeaders().getFirst("username");
         System.out.println(username);
+        System.out.println("controller 메세지 저장");
         System.out.println(chatDTO.getSender());
 
         if(!username.equals(chatDTO.getSender())){
