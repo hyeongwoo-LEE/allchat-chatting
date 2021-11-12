@@ -13,8 +13,4 @@ public interface ChatRepository extends ReactiveMongoRepository<Chat, String> {
     @Tailable // 커서를 안닫고 계속 유지한다.
     @Query("{roomId:?0, createDateTime:{$gte:?1}}")
     Flux<Chat> mFindByRoomId(Integer roomId, LocalDateTime createDateTime);
-
-    @Query("{roomId:?0, participant:?1}")
-    Chat getJoinDateTime(Integer roomId, String participant);
-
 }
