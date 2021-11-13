@@ -35,12 +35,12 @@ public class ChatController {
         System.out.println("joinDateTime: " + chatAuthDTO.getJoinDateTime());
 
         //jwt - claims 값
-        String username = request.getHeaders().getFirst("username");
-
+        //String username = request.getHeaders().getFirst("username");
+/*
         //권한체크
         if(!username.equals(chatAuthDTO.getUsername())){
             throw new CustomException("채팅방 메세지 조회 권한이 없습니다.");
-        }
+        }*/
 
         return chatService.chatList(roomId, chatAuthDTO.getJoinDateTime())
                 .subscribeOn(Schedulers.boundedElastic());
