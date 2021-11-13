@@ -31,6 +31,10 @@ public class ChatController {
 
         String username = request.getHeaders().getFirst("username");
 
+        System.out.println("username(header): " + username);
+        System.out.println("username(chatAuthDTO): " + chatAuthDTO.getUsername());
+        System.out.println("joinDateTime(chatAuthDTO): " + chatAuthDTO.getJoinDateTime());
+
         if(!username.equals(chatAuthDTO.getUsername())){
             throw new CustomException("채팅방 메세지 조회 권한이 없습니다.");
         }
