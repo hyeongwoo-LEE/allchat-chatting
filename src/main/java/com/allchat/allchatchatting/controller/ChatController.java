@@ -26,15 +26,14 @@ public class ChatController {
      */
     @CrossOrigin
     @GetMapping(value = "/rooms/{roomId}/chats", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<Chat> findByRoomId(@PathVariable Integer roomId, @RequestBody ChatAuthDTO chatAuthDTO,
+    public Flux<Chat> findByRoomId(@PathVariable Integer roomId,
+                                   @ModelAttribute ChatAuthDTO chatAuthDTO,
                                    ServerHttpRequest request){
 
+        //jwt - claims 값
         String username = request.getHeaders().getFirst("username");
 
-        System.out.println("username(header): " + username);
-        System.out.println("username(chatAuthDTO): " + chatAuthDTO.getUsername());
-        System.out.println("joinDateTime(chatAuthDTO): " + chatAuthDTO.getJoinDateTime());
-
+        //권한체크
         if(!username.equals(chatAuthDTO.getUsername())){
             throw new CustomException("채팅방 메세지 조회 권한이 없습니다.");
         }
@@ -50,11 +49,10 @@ public class ChatController {
     @PostMapping("/chats")
     public Mono<Chat> saveMessage(@RequestBody ChatDTO chatDTO, ServerHttpRequest request) {
 
+        //jwt - claims 값
         String username = request.getHeaders().getFirst("username");
-        System.out.println(username);
-        System.out.println("controller 메세지 저장");
-        System.out.println(chatDTO.getSender());
 
+        //권한체크
         if(!username.equals(chatDTO.getSender())){
             throw new CustomException("메세지 작성 권한이 없습니다.");
         }
