@@ -30,13 +30,17 @@ public class ChatController {
                                    @ModelAttribute ChatAuthDTO chatAuthDTO,
                                    ServerHttpRequest request){
 
-        //jwt - claims 값
-        String username = request.getHeaders().getFirst("username");
+        System.out.println("roomId: "+ roomId);
+        System.out.println("username: " + chatAuthDTO.getUsername());
+        System.out.println("joinDateTime: " + chatAuthDTO.getJoinDateTime());
 
+        //jwt - claims 값
+        //String username = request.getHeaders().getFirst("username");
+/*
         //권한체크
         if(!username.equals(chatAuthDTO.getUsername())){
             throw new CustomException("채팅방 메세지 조회 권한이 없습니다.");
-        }
+        }*/
 
         return chatService.chatList(roomId, chatAuthDTO.getJoinDateTime())
                 .subscribeOn(Schedulers.boundedElastic());
@@ -50,12 +54,12 @@ public class ChatController {
     public Mono<Chat> saveMessage(@RequestBody ChatDTO chatDTO, ServerHttpRequest request) {
 
         //jwt - claims 값
-        String username = request.getHeaders().getFirst("username");
-
+        //String username = request.getHeaders().getFirst("username");
+/*
         //권한체크
         if(!username.equals(chatDTO.getSender())){
             throw new CustomException("메세지 작성 권한이 없습니다.");
-        }
+        }*/
 
         return chatService.saveMessage(chatDTO);
     }
