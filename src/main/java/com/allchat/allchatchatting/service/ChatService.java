@@ -22,10 +22,10 @@ public class ChatService {
     /**
      * 채팅방 메세지 불러오기
      */
-    public Flux<Chat> chatList(Integer roomId, LocalDateTime joinDateTime){
+    public Flux<Chat> chatList(Integer chatRoomId, LocalDateTime joinDateTime){
 
         //참여한 시간 이후 데이터 출력
-       return chatRepository.mFindByRoomId(roomId, joinDateTime);
+       return chatRepository.mFindByRoomId(chatRoomId, joinDateTime);
     }
 
 

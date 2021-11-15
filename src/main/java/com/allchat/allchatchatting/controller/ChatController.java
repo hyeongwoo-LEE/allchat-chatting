@@ -24,8 +24,8 @@ public class ChatController {
      * 채팅방 메세지 불러오기
      */
     @CrossOrigin
-    @GetMapping(value = "/rooms/{roomId}/chats", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<Chat> findByRoomId(@PathVariable Integer roomId,
+    @GetMapping(value = "/chatRooms/{chatRoomId}/chats", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Chat> findByRoomId(@PathVariable Integer chatRoomId,
                                    @ModelAttribute ChatAuthDTO chatAuthDTO,
                                    ServerHttpRequest request){
 
@@ -37,7 +37,7 @@ public class ChatController {
             throw new CustomException("채팅방 메세지 조회 권한이 없습니다.");
         }
 
-        return chatService.chatList(roomId, chatAuthDTO.getJoinDateTime())
+        return chatService.chatList(chatRoomId, chatAuthDTO.getJoinDateTime())
                 .subscribeOn(Schedulers.boundedElastic());
     }
 
