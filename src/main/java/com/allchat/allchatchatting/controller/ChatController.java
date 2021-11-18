@@ -23,7 +23,6 @@ public class ChatController {
     /**
      * 채팅방 메세지 불러오기
      */
-    @CrossOrigin
     @GetMapping(value = "/chatRooms/{chatRoomId}/chats", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Chat> findByRoomId(@PathVariable Integer chatRoomId,
                                    @ModelAttribute ChatAuthDTO chatAuthDTO,
@@ -44,7 +43,6 @@ public class ChatController {
     /**
      * 메세지 저장
      */
-    @CrossOrigin
     @PostMapping("/chats")
     public Mono<Chat> saveMessage(@RequestBody ChatDTO chatDTO, ServerHttpRequest request) {
 
@@ -62,7 +60,6 @@ public class ChatController {
     /**
      * 방참여,나가기 메시지 저장
      */
-    @CrossOrigin
     @PostMapping("/chats/notifications")
     public Mono<Chat> saveNoticeMessage(@RequestBody ChatNoticeDTO chatNoticeDTO) {
 

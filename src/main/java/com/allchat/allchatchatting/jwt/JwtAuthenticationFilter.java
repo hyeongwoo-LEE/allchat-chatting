@@ -1,7 +1,6 @@
-package com.allchat.allchatchatting.filter;
+package com.allchat.allchatchatting.jwt;
 
 import com.allchat.allchatchatting.dto.AuthFilterDTO;
-import com.allchat.allchatchatting.jwt.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
