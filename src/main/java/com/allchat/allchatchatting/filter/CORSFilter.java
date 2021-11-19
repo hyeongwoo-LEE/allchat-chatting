@@ -31,7 +31,7 @@ public class CORSFilter implements WebFilter {
         headers.setAccessControlAllowCredentials(true);
         headers.setAccessControlAllowMethods(Arrays.asList(HttpMethod.GET, HttpMethod.POST));
         headers.setAccessControlMaxAge(3600);
-        headers.setAccessControlAllowHeaders(Arrays.asList("Origin, X-Requested-With, Content-Type, Accept, Key, Authorization"));
+        headers.setAccessControlAllowHeaders(Arrays.asList("Origin, X-Requested-With, Content-Type, Accept, Key, Authorization, heartbeatTimeout"));
 
         ServerHttpRequest request = exchange.getRequest();
         if (request.getMethod() == HttpMethod.OPTIONS) {
